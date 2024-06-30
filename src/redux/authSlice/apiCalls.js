@@ -12,11 +12,11 @@ export const login = async (user, dispatch) => {
 		const { data } = await axios.post(url, user);
 
 		const decodeData = jwt_decode(data.data);
-		if (!decodeData.isAdmin) {
-			toast.error("You don't have access");
-			dispatch(loginFailure());
-			return;
-		}
+		// if (decodeData.role!==1) {
+		// 	toast.error("You don't have access");
+		// 	dispatch(loginFailure());
+		// 	return;
+		// }
 		toast.success(data.message);
 		dispatch(loginSuccess({ ...decodeData, token: data.data }));
 		window.location = "/";

@@ -13,10 +13,10 @@ const Users = () => {
 		<div className={styles.container}>
 			<div className={styles.head}>
 				<h1>
-					users <PeopleAltIcon />
+					Người dùng <PeopleAltIcon />
 				</h1>
 				<Link to="/users/new">
-					<Button startIcon={<AddIcon />} label="Add New User" />
+					<Button startIcon={<AddIcon />} label="Thêm người dùng" />
 				</Link>
 			</div>
 			<UserTable users={users} />

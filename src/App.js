@@ -1,20 +1,22 @@
 import { Fragment, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Route, Switch } from "react-router-dom";
-import { getAllSongs } from "./redux/songsSlice/apiCalls";
+import { Route, Switch, Redirect } from "react-router-dom";
 import { getAllUsers } from "./redux/usersSlice/apiCalls";
 import { getAllCourses } from "./redux/coursesSlice/apiCalls";
-import { getAllPlaylists } from "./redux/playlistSlice/apiCalls";
+import { getAllNotifications } from "./redux/notificationsSlice/apiCalls";
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
-import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Users from "./pages/Users";
-import Songs from "./pages/Songs";
 import Courses from "./pages/Courses";
-import SongForm from "./components/Forms/SongForm";
+import Notifications from "./pages/Notifications";
+import Home from "./pages/Home";
+import Groups from "./pages/Groups";
+import NotificationDetail from "./pages/NotificationDetail";
 import UserForm from "./components/Forms/UserForm";
-import CourseForm from "./components/Forms/CourseFrom";
+import CourseForm from "./components/Forms/CourseForm";
+import GroupForm from "./components/Forms/GroupForm";
+import NotificationForm from "./components/Forms/NotificationForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 
@@ -46,11 +48,16 @@ function App() {
 			if (user) token = user.token;
 		}
 
-		if (user && token) {
-			getAllSongs(dispatch);
+		if (user && user.role===1 && token) {
 			getAllUsers(dispatch);
-			getAllPlaylists(dispatch);
 			getAllCourses(dispatch); // them
+			getAllNotifications(dispatch); // them
+		}
+		if (user && user.role===2 && token) {
+			getAllNotifications(dispatch);
+		}
+		if (user && user.role===3 && token) {
+			getAllNotifications(dispatch);
 		}
 	}, [dispatch, user]);
 
@@ -60,9 +67,35 @@ function App() {
 
 	return (
 		<Switch>
-			{/* <Route path="/login" component={Login} /> */}
-			{/* {user && user.isAdmin && ( */}
-			{
+			<Route path="/login" component={Login} />
+			{user && user.role===1 && (			
+				<Fragment>
+					<Navbar />
+					{isMobile && (
+						<button onClick={toggleSidebar} className="toggle-sidebar-btn">
+							<FontAwesomeIcon icon={isSidebarVisible ? faTimes : faBars} />
+						</button>
+					)}
+					<div className={`sidebar-container ${isSidebarVisible ? 'visible' : 'hidden'}`}>
+						<Sidebar  />
+					</div>
+					{isSidebarVisible && isMobile && <div className="overlay" onClick={toggleSidebar}></div>}
+					<main className={`main ${isSidebarVisible ? '' : 'sidebar-hidden'}`}>
+						<Route path="/users/:id" component={UserForm} />
+						<Route path="/courses/:id" component={CourseForm} />
+						<Route path="/notifications/:id" component={NotificationForm} />
+						<Route path="/course/:courseId/group/:groupId" component={GroupForm} />
+						<Route path="/groupByCourse/:id" component={Groups} /> 
+						<Route path="/detail/:id" component={NotificationDetail} />
+						<Route exact path="/" component={Home} />
+						<Route exact path="/users" component={Users} />
+						<Route exact path="/courses" component={Courses} /> 
+						<Route exact path="/notifications" component={Notifications} /> 
+					</main> 
+				</Fragment>
+			)}
+
+			{user && user.role===2 && (			
 				<Fragment>
 					<Navbar />
 					{isMobile && (
@@ -75,18 +108,32 @@ function App() {
 					</div>
 					{isSidebarVisible && isMobile && <div className="overlay" onClick={toggleSidebar}></div>}
 					<main className={`main ${isSidebarVisible ? '' : 'sidebar-hidden'}`}>
-						<Route exact path="/" component={Dashboard} />
-						<Route path="/songs/:id" component={SongForm} />
-						<Route path="/users/:id" component={UserForm} />
-						<Route path="/courses/:id" component={CourseForm} />
-						<Route exact path="/users" component={Users} />
-						<Route exact path="/songs" component={Songs} />
-						<Route exact path="/courses" component={Courses} /> 
+						<Route exact path="/" component={Home} />
+						<Route path="/detail/:id" component={NotificationDetail} />
 					</main> 
 				</Fragment>
-			}
-			{/* )} */} 
-			{/* {!user && <Redirect to="/login" />} */}
+			)}
+
+			{user && user.role===3 && (			
+				<Fragment>
+					<Navbar />
+					{isMobile && (
+						<button onClick={toggleSidebar} className="toggle-sidebar-btn">
+							<FontAwesomeIcon icon={isSidebarVisible ? faTimes : faBars} />
+						</button>
+					)}
+					<div className={`sidebar-container ${isSidebarVisible ? 'visible' : 'hidden'}`}>
+						<Sidebar />
+					</div>
+					{isSidebarVisible && isMobile && <div className="overlay" onClick={toggleSidebar}></div>}
+					<main className={`main ${isSidebarVisible ? '' : 'sidebar-hidden'}`}>
+						<Route exact path="/" component={Home} />
+						<Route path="/detail/:id" component={NotificationDetail} />
+					</main> 
+				</Fragment>
+			)}
+			
+			{!user && <Redirect to="/login" />}
 		</Switch>
 	);
 }

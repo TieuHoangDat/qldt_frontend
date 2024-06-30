@@ -11,7 +11,7 @@
 	}
 
 	.select {
-		height: 5rem;
+		height: 4rem;
 		font-size: 1.6rem;
 		font-weight: 400;
 		border-radius: 0.5rem;
@@ -22,6 +22,7 @@
 			outline: 1px solid var(--black);
 		}
 	}
+
 	.error {
 		border-color: red;
 		outline: red;

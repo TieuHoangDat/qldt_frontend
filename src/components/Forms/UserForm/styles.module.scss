@@ -1,5 +1,7 @@
 .container {
 	margin: 2rem;
+	display: flex;
+	justify-content: center;
 
 	.heading {
 		display: flex;
@@ -16,7 +18,7 @@
 
 	.form_container {
 		border-radius: 1rem;
-		width: 55rem;
+		width: 70%;
 		padding: 2rem;
 
 		.input_container {

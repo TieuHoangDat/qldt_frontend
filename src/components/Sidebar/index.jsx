@@ -1,27 +1,61 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/authSlice";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import MusicNoteIcon from "@mui/icons-material/MusicNote";
 import PeopleIcon from "@mui/icons-material/People";
 import ExitToApp from "@mui/icons-material/ExitToApp";
+import HomeIcon from '@mui/icons-material/Home';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
+import ScheduleIcon from '@mui/icons-material/Schedule';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import GradeIcon from '@mui/icons-material/Grade';
+import EditIcon from '@mui/icons-material/Edit';
 import styles from "./styles.module.scss";
 
-const options = [
-	{ name: "dashboard", path: "/", icon: <DashboardIcon /> },
-	{ name: "users", path: "/users", icon: <PeopleIcon /> },
-	{ name: "songs", path: "/songs", icon: <MusicNoteIcon /> },
-	{ name: "Quản lý môn học", path: "/courses", icon: <DashboardIcon /> },
-];
+
 
 const Sidebar = () => {
+	const user = useSelector((state) => state.auth.user);
 	const dispatch = useDispatch();
 
 	const logoutHandler = () => {
 		dispatch(logout());
 		window.location = "/login";
 	};
+
+	var options = []
+	
+	if(user.role===1) {
+		options = [
+			{ name: "Trang chủ", path: "/", icon: <HomeIcon /> },
+			{ name: "Quản lý người dùng", path: "/users", icon: <PeopleIcon /> },
+			{ name: "Quản lý môn học", path: "/courses", icon: <MenuBookIcon /> },
+			{ name: "Quản lý thông báo", path: "/notifications", icon: <NotificationsIcon /> },
+			{ name: "Thông tin tài khoản", path: "/i", icon: <AccountCircleIcon /> },
+
+		];
+	}
+	if(user.role===2) {
+		options = [
+			{ name: "Trang chủ", path: "/", icon: <HomeIcon /> },
+			{ name: "Quản lý nhóm học", path: "/1", icon: <MenuBookIcon /> },
+			{ name: "Xem thời khóa biểu", path: "/2", icon: <ScheduleIcon /> },
+			{ name: "Thông tin tài khoản", path: "/i", icon: <AccountCircleIcon /> },
+		];
+	}
+	if(user.role===3) {
+		options = [
+			{ name: "Trang chủ", path: "/", icon: <HomeIcon /> },
+			{ name: "Đăng kí tín chỉ", path: "/2", icon: <EditIcon /> },
+			{ name: "Xem thời khóa biểu", path: "/1", icon: <ScheduleIcon /> },
+			{ name: "Xem điểm", path: "/3", icon: <GradeIcon /> },
+			{ name: "Xem học phí", path: "/4", icon: <AttachMoneyIcon /> },
+			{ name: "Thông tin tài khoản", path: "/i", icon: <AccountCircleIcon /> },
+		];
+	}
+	
 
 	return (
 		<div className={styles.sidebar}>
@@ -49,7 +83,7 @@ const Sidebar = () => {
 				<li className={styles.logout_link} onClick={logoutHandler}>
 					<div className={styles.option}>
 						<ExitToApp />
-						<span>logout</span>
+						<span>Đăng xuất</span>
 					</div>
 				</li>
 			</ul>

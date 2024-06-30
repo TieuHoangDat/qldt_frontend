@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { deleteSong } from "../../../redux/songsSlice/apiCalls";
+import { useHistory } from "react-router-dom";
+import { deleteGroup } from "../../../redux/groupsSlice/apiCalls"; // Thay đổi import action từ songs sang courses
 import {
 	TableContainer,
 	Table,
@@ -17,14 +18,17 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import styles from "./styles.module.scss";
 
-const SongTable = ({ songs }) => {
+const GroupTable = ({ groups, courseId }) => {
 	const dispatch = useDispatch();
 	const [loading, setLoading] = useState(true);
 
 	setTimeout(() => setLoading(false), 1000);
 
+	const history = useHistory();
+
 	const handleDelete = (id) => {
-		deleteSong(id, dispatch);
+		deleteGroup(id, dispatch); // Thay đổi
+		history.go(0);
 	};
 
 	return (
@@ -32,53 +36,58 @@ const SongTable = ({ songs }) => {
 			<Table>
 				<TableHead>
 					<TableRow>
-						<TableCell align="center">Image</TableCell>
-						<TableCell align="center">name</TableCell>
-						<TableCell align="center">Artist</TableCell>
-						<TableCell align="center">Actions</TableCell>
+						<TableCell align="center">Tên nhóm học</TableCell>
+						<TableCell align="center">Thứ trong tuần</TableCell>
+						<TableCell align="center">Kíp</TableCell>
+						<TableCell align="center">Tên giảng viên</TableCell>
+						<TableCell align="center">Phòng</TableCell>
+						<TableCell align="center">Học kì</TableCell>
+						<TableCell align="center">Sửa-Xóa</TableCell>
 					</TableRow>
 				</TableHead>
 				{loading && (
 					<TableBody>
 						<TableRow>
-							<TableCell align="center"></TableCell>
-							<TableCell align="center"></TableCell>
-							<TableCell align="left">
+							<TableCell align="center">
 								<CircularProgress
 									style={{ color: "#1ed760", margin: "2rem 0" }}
 								/>
 							</TableCell>
+							<TableCell align="center"></TableCell>
+							<TableCell align="center"></TableCell>
 							<TableCell align="center"></TableCell>
 						</TableRow>
 					</TableBody>
 				)}
 				{!loading && (
 					<TableBody>
-						{songs.length !== 0 &&
-							songs.map((song, index) => (
-								<TableRow key={song._id}>
+						{groups.length !== 0 &&
+							groups.map((group, index) => (
+								<TableRow key={group.id}>
+									<TableCell align="center">{group.groupName}</TableCell>
+									<TableCell align="center">{group.dayOfWeek}</TableCell>
+									<TableCell align="center">{group.period}</TableCell>
+									<TableCell align="center">{group.teacher.name}</TableCell>
+									<TableCell align="center">{group.room}</TableCell>
+									<TableCell align="center">{group.term.name}</TableCell>
 									<TableCell align="center">
-										<img className={styles.song_img} src={song.img} alt="" />
-									</TableCell>
-									<TableCell align="center">{song.name}</TableCell>
-									<TableCell align="center">{song.artist}</TableCell>
-									<TableCell align="center">
-										<Link to={`/songs/${song._id}`}>
+										<Link to={`/course/${courseId}/group/${group.groupId}`}>
 											<IconButton className={styles.edit_btn}>
 												<EditIcon />
 											</IconButton>
 										</Link>
 										<IconButton
 											className={styles.delete_btn}
-											onClick={() => handleDelete(song._id)}
+											onClick={() => handleDelete(group.groupId)}
 										>
 											<DeleteIcon />
 										</IconButton>
 									</TableCell>
 								</TableRow>
 							))}
-						{songs.length === 0 && (
+						{groups.length === 0 && (
 							<TableRow>
+								<TableCell align="center"></TableCell>
 								<TableCell align="center"></TableCell>
 								<TableCell align="center"></TableCell>
 								<TableCell align="center">
@@ -88,7 +97,6 @@ const SongTable = ({ songs }) => {
 										alt=""
 									/>
 								</TableCell>
-								<TableCell align="center"></TableCell>
 							</TableRow>
 						)}
 					</TableBody>
@@ -98,4 +106,4 @@ const SongTable = ({ songs }) => {
 	);
 };
 
-export default SongTable;
+export default GroupTable;

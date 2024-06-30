@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { deleteCourse } from "../../../redux/coursesSlice/apiCalls"; // Thay đổi import action từ songs sang courses
+import Button from "../../Button";
+import { deleteCourse } from "../../../redux/coursesSlice/apiCalls"; // Thay đổi 
 import {
 	TableContainer,
 	Table,
@@ -19,12 +21,14 @@ import styles from "./styles.module.scss";
 
 const CourseTable = ({ courses }) => {
 	const dispatch = useDispatch();
+	const history = useHistory();
 	const [loading, setLoading] = useState(true);
 
 	setTimeout(() => setLoading(false), 1000);
 
 	const handleDelete = (id) => {
-		deleteCourse(id, dispatch); // Thay đổi hàm gọi action từ deleteSong sang deleteCourse
+		deleteCourse(id, dispatch); // Thay đổi 
+		history.go(0);
 	};
 
 	return (
@@ -36,7 +40,8 @@ const CourseTable = ({ courses }) => {
 						<TableCell align="center">Tên môn học</TableCell>
 						<TableCell align="center">Số tín chỉ</TableCell>
 						<TableCell align="center">Học kì</TableCell>
-						<TableCell align="center">Actions</TableCell>
+						<TableCell align="center">Sửa-Xóa</TableCell>
+						<TableCell align="center"></TableCell>
 					</TableRow>
 				</TableHead>
 				{loading && (
@@ -74,6 +79,11 @@ const CourseTable = ({ courses }) => {
 										>
 											<DeleteIcon />
 										</IconButton>
+									</TableCell>
+									<TableCell align="center">
+										<Link to={`/groupByCourse/${course.id}`}> 
+											<Button label="Xem nhóm" /> 
+										</Link>
 									</TableCell>
 								</TableRow>
 							))}

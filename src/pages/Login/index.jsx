@@ -8,13 +8,13 @@ import { Paper } from "@mui/material";
 import styles from "./styles.module.scss";
 
 const Login = () => {
-	const [data, setData] = useState({ email: "", password: "" });
+	const [data, setData] = useState({ username: "", password: "" });
 	const [errors, setErrors] = useState({});
 	const { isFetching } = useSelector((state) => state.auth);
 	const dispatch = useDispatch();
 
 	const schema = {
-		email: Joi.string().email({ tlds: false }).required().label("Email"),
+		username: Joi.string().required().label("Username"),
 		password: Joi.string().required().label("Password"),
 	};
 
@@ -44,13 +44,13 @@ const Login = () => {
 					<div className={styles.heading}>Login</div>
 					<div className={styles.input_container}>
 						<TextField
-							name="email"
-							label="Email"
-							value={data.email}
+							name="username"
+							label="Username"
+							value={data.username}
 							handleInputState={handleInputState}
 							handleErrorState={handleErrorState}
-							error={errors.email}
-							schema={schema.email}
+							error={errors.username}
+							schema={schema.username}
 							required={true}
 						/>
 					</div>

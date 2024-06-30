@@ -5,16 +5,16 @@ import storage from "redux-persist/lib/storage";
 
 import authReducer from "./authSlice";
 import usersReducer from "./usersSlice";
-import songsReducer from "./songsSlice";
-import playlistReducer from "./playlistSlice";
 import coursesReducer from "./coursesSlice"; // them
+import notificationsReducer from "./notificationsSlice"; // them
+import groupsReducer from "./groupsSlice";
 
 const reducers = combineReducers({
 	auth: authReducer,
 	users: usersReducer,
-	songs: songsReducer,
-	playlists: playlistReducer,
 	courses: coursesReducer, // them
+	groups: groupsReducer, // them
+	notifications: notificationsReducer, // them
 });
 
 const persistConfig = {
