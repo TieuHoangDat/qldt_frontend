@@ -18,6 +18,7 @@
 				font-size: 1.4rem;
 				color: var(--black);
 				font-weight: 500;
+				min-width: 100px;
 
 				.edit_btn {
 					color: var(--blue-black);
@@ -25,6 +26,15 @@
 					svg {
 						width: 2rem;
 						height: 2rem;
+					}
+				}
+
+				.link {
+					color: var(--black);
+					text-decoration: none;
+
+					&:hover {
+						color: var(--primary);
 					}
 				}
 

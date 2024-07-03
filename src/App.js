@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { getAllUsers } from "./redux/usersSlice/apiCalls";
 import { getAllCourses } from "./redux/coursesSlice/apiCalls";
+import { getAllTerms } from "./redux/termsSlice/apiCalls";
 import { getAllNotifications } from "./redux/notificationsSlice/apiCalls";
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
@@ -12,6 +13,12 @@ import Courses from "./pages/Courses";
 import Notifications from "./pages/Notifications";
 import Home from "./pages/Home";
 import Groups from "./pages/Groups";
+import Profile from "./pages/Profile";
+import Tuition from "./pages/Tuition";
+import GroupRegistration from "./pages/GroupRegistration";
+import Grade from "./pages/Grade";
+import TimeTable from "./pages/TimeTable";
+import ManagerGroup from "./pages/ManagerGroup";
 import NotificationDetail from "./pages/NotificationDetail";
 import UserForm from "./components/Forms/UserForm";
 import CourseForm from "./components/Forms/CourseForm";
@@ -58,6 +65,7 @@ function App() {
 		}
 		if (user && user.role===3 && token) {
 			getAllNotifications(dispatch);
+			getAllTerms(user.account_id, dispatch);
 		}
 	}, [dispatch, user]);
 
@@ -91,6 +99,7 @@ function App() {
 						<Route exact path="/users" component={Users} />
 						<Route exact path="/courses" component={Courses} /> 
 						<Route exact path="/notifications" component={Notifications} /> 
+						<Route exact path="/me" component={Profile} /> 
 					</main> 
 				</Fragment>
 			)}
@@ -110,6 +119,9 @@ function App() {
 					<main className={`main ${isSidebarVisible ? '' : 'sidebar-hidden'}`}>
 						<Route exact path="/" component={Home} />
 						<Route path="/detail/:id" component={NotificationDetail} />
+						<Route exact path="/me" component={Profile} /> 
+						<Route exact path="/timeTable" component={TimeTable} />
+						<Route exact path="/managerGroup" component={ManagerGroup} />
 					</main> 
 				</Fragment>
 			)}
@@ -129,6 +141,11 @@ function App() {
 					<main className={`main ${isSidebarVisible ? '' : 'sidebar-hidden'}`}>
 						<Route exact path="/" component={Home} />
 						<Route path="/detail/:id" component={NotificationDetail} />
+						<Route exact path="/me" component={Profile} /> 
+						<Route exact path="/grade" component={Grade} /> 
+						<Route exact path="/groupRegistration" component={GroupRegistration} /> 
+						<Route exact path="/tuition" component={Tuition} />
+						<Route exact path="/timeTable" component={TimeTable} />
 					</main> 
 				</Fragment>
 			)}

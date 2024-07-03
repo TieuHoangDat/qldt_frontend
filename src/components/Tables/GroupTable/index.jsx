@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
@@ -12,7 +11,6 @@ import {
 	TableRow,
 	Paper,
 	IconButton,
-	CircularProgress,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -20,9 +18,6 @@ import styles from "./styles.module.scss";
 
 const GroupTable = ({ groups, courseId }) => {
 	const dispatch = useDispatch();
-	const [loading, setLoading] = useState(true);
-
-	setTimeout(() => setLoading(false), 1000);
 
 	const history = useHistory();
 
@@ -44,22 +39,7 @@ const GroupTable = ({ groups, courseId }) => {
 						<TableCell align="center">Học kì</TableCell>
 						<TableCell align="center">Sửa-Xóa</TableCell>
 					</TableRow>
-				</TableHead>
-				{loading && (
-					<TableBody>
-						<TableRow>
-							<TableCell align="center">
-								<CircularProgress
-									style={{ color: "#1ed760", margin: "2rem 0" }}
-								/>
-							</TableCell>
-							<TableCell align="center"></TableCell>
-							<TableCell align="center"></TableCell>
-							<TableCell align="center"></TableCell>
-						</TableRow>
-					</TableBody>
-				)}
-				{!loading && (
+				</TableHead>		
 					<TableBody>
 						{groups.length !== 0 &&
 							groups.map((group, index) => (
@@ -100,7 +80,6 @@ const GroupTable = ({ groups, courseId }) => {
 							</TableRow>
 						)}
 					</TableBody>
-				)}
 			</Table>
 		</TableContainer>
 	);

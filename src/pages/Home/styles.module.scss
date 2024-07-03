@@ -18,4 +18,43 @@
 
 		}
 	}
+
+	.slideshow-container {
+		height: 440px;
+		padding-top: 20px;
+		max-width: 1000px;
+		position: relative;
+		margin: auto;
+	}
+
+	.mySlides {
+		display: none;
+	}
+
+	.fadess {
+		animation: fade 3s linear infinite;
+	}
+
+	@keyframes fade {
+		0% {
+			opacity: 0.8;
+		}
+
+		20% {
+			opacity: 1;
+		}
+
+		50% {
+			opacity: 1;
+		}
+
+		80% {
+			opacity: 1;
+		}
+
+		100% {
+			opacity: 0.8;
+		}
+	}
+
 }

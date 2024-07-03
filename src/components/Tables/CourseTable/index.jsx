@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -13,7 +12,6 @@ import {
 	TableRow,
 	Paper,
 	IconButton,
-	CircularProgress,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -22,9 +20,7 @@ import styles from "./styles.module.scss";
 const CourseTable = ({ courses }) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
-	const [loading, setLoading] = useState(true);
 
-	setTimeout(() => setLoading(false), 1000);
 
 	const handleDelete = (id) => {
 		deleteCourse(id, dispatch); // Thay đổi 
@@ -44,21 +40,6 @@ const CourseTable = ({ courses }) => {
 						<TableCell align="center"></TableCell>
 					</TableRow>
 				</TableHead>
-				{loading && (
-					<TableBody>
-						<TableRow>
-							<TableCell align="center">
-								<CircularProgress
-									style={{ color: "#1ed760", margin: "2rem 0" }}
-								/>
-							</TableCell>
-							<TableCell align="center"></TableCell>
-							<TableCell align="center"></TableCell>
-							<TableCell align="center"></TableCell>
-						</TableRow>
-					</TableBody>
-				)}
-				{!loading && (
 					<TableBody>
 						{courses.length !== 0 &&
 							courses.map((course, index) => (
@@ -102,7 +83,6 @@ const CourseTable = ({ courses }) => {
 							</TableRow>
 						)}
 					</TableBody>
-				)}
 			</Table>
 		</TableContainer>
 	);

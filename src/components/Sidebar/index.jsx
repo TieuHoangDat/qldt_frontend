@@ -33,26 +33,26 @@ const Sidebar = () => {
 			{ name: "Quản lý người dùng", path: "/users", icon: <PeopleIcon /> },
 			{ name: "Quản lý môn học", path: "/courses", icon: <MenuBookIcon /> },
 			{ name: "Quản lý thông báo", path: "/notifications", icon: <NotificationsIcon /> },
-			{ name: "Thông tin tài khoản", path: "/i", icon: <AccountCircleIcon /> },
+			{ name: "Thông tin tài khoản", path: "/me", icon: <AccountCircleIcon /> },
 
 		];
 	}
 	if(user.role===2) {
 		options = [
 			{ name: "Trang chủ", path: "/", icon: <HomeIcon /> },
-			{ name: "Quản lý nhóm học", path: "/1", icon: <MenuBookIcon /> },
-			{ name: "Xem thời khóa biểu", path: "/2", icon: <ScheduleIcon /> },
-			{ name: "Thông tin tài khoản", path: "/i", icon: <AccountCircleIcon /> },
+			{ name: "Quản lý nhóm học", path: "/managerGroup", icon: <MenuBookIcon /> },
+			{ name: "Xem thời khóa biểu", path: "/timeTable", icon: <ScheduleIcon /> },
+			{ name: "Thông tin tài khoản", path: "/me", icon: <AccountCircleIcon /> },
 		];
 	}
 	if(user.role===3) {
 		options = [
 			{ name: "Trang chủ", path: "/", icon: <HomeIcon /> },
-			{ name: "Đăng kí tín chỉ", path: "/2", icon: <EditIcon /> },
-			{ name: "Xem thời khóa biểu", path: "/1", icon: <ScheduleIcon /> },
-			{ name: "Xem điểm", path: "/3", icon: <GradeIcon /> },
-			{ name: "Xem học phí", path: "/4", icon: <AttachMoneyIcon /> },
-			{ name: "Thông tin tài khoản", path: "/i", icon: <AccountCircleIcon /> },
+			{ name: "Đăng kí tín chỉ", path: "/groupRegistration", icon: <EditIcon /> },
+			{ name: "Xem thời khóa biểu", path: "/timeTable", icon: <ScheduleIcon /> },
+			{ name: "Xem điểm", path: "/grade", icon: <GradeIcon /> },
+			{ name: "Xem học phí", path: "/tuition", icon: <AttachMoneyIcon /> },
+			{ name: "Thông tin tài khoản", path: "/me", icon: <AccountCircleIcon /> },
 		];
 	}
 	

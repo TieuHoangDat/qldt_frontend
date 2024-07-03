@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -12,17 +11,14 @@ import {
 	TableRow,
 	Paper,
 	IconButton,
-	CircularProgress,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import styles from "./styles.module.scss";
 
 const UserTable = ({ users }) => {
-	const [loading, setLoading] = useState(true);
 	const dispatch = useDispatch();
 
-	setTimeout(() => setLoading(false), 1000);
 
 	const history = useHistory();
 
@@ -43,22 +39,6 @@ const UserTable = ({ users }) => {
 						<TableCell align="center">Sửa-Xóa</TableCell>
 					</TableRow>
 				</TableHead>
-				{loading && (
-					<TableBody>
-						<TableRow>
-							<TableCell align="center"></TableCell>
-							<TableCell align="center"></TableCell>
-							<TableCell align="center">
-								<CircularProgress
-									style={{ color: "#1ed760", margin: "2rem 0" }}
-								/>
-							</TableCell>
-							<TableCell align="center"></TableCell>
-							<TableCell align="center"></TableCell>
-						</TableRow>
-					</TableBody>
-				)}
-				{!loading && (
 					<TableBody>
 						{users &&
 							users.length !== 0 &&
@@ -101,7 +81,6 @@ const UserTable = ({ users }) => {
 							</TableRow>
 						)}
 					</TableBody>
-				)}
 			</Table>
 		</TableContainer>
 	);

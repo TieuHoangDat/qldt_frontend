@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import CourseTable from "../../components/Tables/CourseTable"; // Thay đổi import từ SongTable sang CourseTable
 import Button from "../../components/Button";
 import AddIcon from "@mui/icons-material/Add";
-import MusicNoteIcon from "@mui/icons-material/MusicNote";
 import styles from "./styles.module.scss";
 
 const Courses = () => {

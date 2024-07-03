@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
@@ -12,7 +11,6 @@ import {
 	TableRow,
 	Paper,
 	IconButton,
-	CircularProgress,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -23,13 +21,10 @@ const NotificationTable = ({ notifications }) => {
 
 	const dispatch = useDispatch();
 	const history = useHistory();
-	const [loading, setLoading] = useState(true);
-
-	setTimeout(() => setLoading(false), 1000);
 
 	const handleDelete = (id) => {
 		deleteNotification(id, dispatch); // Thay đổi 
-		history.go(0);
+		// setGroupRegistrations(prevRegistrations => prevRegistrations.filter(gr => gr.id !== id));
 	};
 
 	return (
@@ -44,24 +39,12 @@ const NotificationTable = ({ notifications }) => {
                     	)}
 					</TableRow>
 				</TableHead>
-				{loading && (
-					<TableBody>
-						<TableRow>
-							<TableCell align="center" colSpan={3}>
-								<CircularProgress
-									style={{ color: "#1ed760", margin: "2rem 0" }}
-								/>
-							</TableCell>
-						</TableRow>
-					</TableBody>
-				)}
-				{!loading && (
 					<TableBody>
 						{notifications.length !== 0 &&
 							notifications.map((notification) => (
 								<TableRow key={notification.id}>
 									<TableCell style={{ padding: "0 2rem" }}>
-										<Link to={`/detail/${notification.id}`} >
+										<Link to={`/detail/${notification.id}`}  className={styles.link}>
 											{notification.title}
 										</Link>
 									</TableCell>
@@ -95,7 +78,6 @@ const NotificationTable = ({ notifications }) => {
 							</TableRow>
 						)}
 					</TableBody>
-				)}
 			</Table>
 		</TableContainer>
 	);

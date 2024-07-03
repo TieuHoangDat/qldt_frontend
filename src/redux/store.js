@@ -7,6 +7,7 @@ import authReducer from "./authSlice";
 import usersReducer from "./usersSlice";
 import coursesReducer from "./coursesSlice"; // them
 import notificationsReducer from "./notificationsSlice"; // them
+import termsReducer from "./termsSlice"; // them
 import groupsReducer from "./groupsSlice";
 
 const reducers = combineReducers({
@@ -15,6 +16,7 @@ const reducers = combineReducers({
 	courses: coursesReducer, // them
 	groups: groupsReducer, // them
 	notifications: notificationsReducer, // them
+	terms: termsReducer, // them
 });
 
 const persistConfig = {
