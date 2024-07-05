@@ -70,4 +70,34 @@
 			margin-left: -25rem;
 		}
 	}
+
+	.chart {
+		margin: 2rem 0;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 20px;
+
+		>div {
+			flex: 1 1 calc(30% - 20px);
+			/* Tính toán độ rộng mỗi div với lề 20px */
+			background-color: #fff;
+			padding: 20px;
+			border-radius: 8px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+		}
+	}
+
+	@media (max-width: 768px) {
+		.chart {
+			flex-wrap: wrap;
+
+			>div {
+				flex: 1 1 100%;
+				/* Mỗi div chiếm hết chiều rộng khi màn hình thu nhỏ */
+				margin-bottom: 20px;
+				/* Thêm margin dưới để tách các hàng */
+			}
+		}
+	}
 }

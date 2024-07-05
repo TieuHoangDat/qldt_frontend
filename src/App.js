@@ -9,6 +9,7 @@ import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
 import Login from "./pages/Login";
 import Users from "./pages/Users";
+import UpdateGrade from "./pages/UpdateGrade";
 import Courses from "./pages/Courses";
 import Notifications from "./pages/Notifications";
 import Home from "./pages/Home";
@@ -95,6 +96,7 @@ function App() {
 						<Route path="/course/:courseId/group/:groupId" component={GroupForm} />
 						<Route path="/groupByCourse/:id" component={Groups} /> 
 						<Route path="/detail/:id" component={NotificationDetail} />
+						<Route path="/updateGrade/:groupId" component={UpdateGrade} />
 						<Route exact path="/" component={Home} />
 						<Route exact path="/users" component={Users} />
 						<Route exact path="/courses" component={Courses} /> 

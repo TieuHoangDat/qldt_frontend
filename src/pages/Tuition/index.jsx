@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import styles from "./styles.module.scss";
+import { Bar } from 'react-chartjs-2';
 import {
 	TableContainer,
 	Table,
@@ -13,6 +14,32 @@ import {
 const Tuition = () => {
 	const { terms } = useSelector((state) => state.terms);
 
+	const chartData = {
+		labels: terms.map((term) => term.term),
+		datasets: [
+			{
+				label: 'Học phí',
+				data: terms.map((term) => term.tuition),
+				backgroundColor: 'rgba(54, 162, 235, 0.2)',
+				borderColor: 'rgba(54, 162, 235, 1)',
+				borderWidth: 1,
+			},
+		],
+	};
+
+	const chartData2 = {
+		labels: terms.map((term) => term.term),
+		datasets: [
+			{
+			label: 'Số tín chỉ tích lũy',
+			data: terms.map((term) => term.tl_credit),
+			backgroundColor: 'rgba(255, 99, 132, 0.2)',
+			borderColor: 'rgba(255, 99, 132, 1)',
+			borderWidth: 1,
+			},
+		],
+	};
+
 
 	return (
 		<div className={styles.container}>
@@ -20,7 +47,14 @@ const Tuition = () => {
 				<h1>
 					Xem học phí 
 				</h1>
-				
+			</div>
+			<div className={styles.chart}>
+				<div style={{ width: '400px' }}>
+					<Bar data={chartData} />
+				</div>
+				<div style={{ width: '400px' }}>
+					<Bar data={chartData2} />
+				</div>
 			</div>
 			<TableContainer component={Paper} className={styles.table_container}>
 			<Table>

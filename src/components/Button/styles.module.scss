@@ -14,10 +14,10 @@ html {
 		align-items: center;
 		justify-content: center;
 		text-transform: initial;
-		min-width: 5rem;
+		// min-width: 5rem;
 
 		&:hover {
-			background: var(--primary);
+			background: #a90000;
 		}
 	}
 }

@@ -1,4 +1,5 @@
 import { useDispatch } from "react-redux";
+import Button from "../../Button";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { deleteGroup } from "../../../redux/groupsSlice/apiCalls"; // Thay đổi import action từ songs sang courses
@@ -38,12 +39,13 @@ const GroupTable = ({ groups, courseId }) => {
 						<TableCell align="center">Phòng</TableCell>
 						<TableCell align="center">Học kì</TableCell>
 						<TableCell align="center">Sửa-Xóa</TableCell>
+						<TableCell align="center"></TableCell>
 					</TableRow>
 				</TableHead>		
 					<TableBody>
 						{groups.length !== 0 &&
 							groups.map((group, index) => (
-								<TableRow key={group.id}>
+								<TableRow key={group.groupId}>
 									<TableCell align="center">{group.groupName}</TableCell>
 									<TableCell align="center">{group.dayOfWeek}</TableCell>
 									<TableCell align="center">{group.period}</TableCell>
@@ -62,6 +64,11 @@ const GroupTable = ({ groups, courseId }) => {
 										>
 											<DeleteIcon />
 										</IconButton>
+									</TableCell>
+									<TableCell align="center">
+										<Link to={`/updateGrade/${group.groupId}`}> 
+											<Button label="Xem điểm" /> 
+										</Link>
 									</TableCell>
 								</TableRow>
 							))}

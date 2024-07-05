@@ -7,7 +7,6 @@ import Joi from "joi";
 import TextField from "../../Inputs/TextField";
 import Button from "../../Button";
 import { Paper } from "@mui/material";
-import MusicNoteIcon from "@mui/icons-material/MusicNote";
 import styles from "./styles.module.scss";
 
 const CourseForm = () => {
